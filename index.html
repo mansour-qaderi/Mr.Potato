@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Mr Potato</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="parts">
+        <img src="https://i.imgur.com/GONNbHf.png" class="draggable" />
+        <img src="https://i.imgur.com/optSzq4.png" class="draggable" />
+        <img src="https://i.imgur.com/qJDxc4o.png" class="draggable" />
+        <img src="https://i.imgur.com/tIZGoeR.png" class="draggable" />
+        <img src="https://i.imgur.com/bKlbeXU.png" class="draggable" />
+        <img src="https://i.imgur.com/eUPbX3H.png" class="draggable" />
+        <img src="https://i.imgur.com/voJPsR5.png" class="draggable" />
+        <img src="https://i.imgur.com/dt2gqit.png" class="draggable" />
+        <img src="https://i.imgur.com/2POeyJZ.png" class="draggable" />
+      </div>
+      <div class="body">
+        <img src="https://i.imgur.com/kXbr8Tb.png" />
+      </div>
+    </div>
+    <script>
+      const draggableElements = document.querySelectorAll(".draggable");
+      let initX, initY, firstX, firstY, whichDown;
+
+      window.addEventListener(
+        "mouseup",
+        function () {
+          if (whichDown) {
+            whichDown.style.zIndex = 0;
+          }
+          whichDown = null;
+        },
+        false
+      );
+
+      window.addEventListener("mousemove", draggable, false);
+
+      draggableElements.forEach((element) => {
+        element.addEventListener("mousedown", function (e) {
+          e.preventDefault();
+          whichDown = this;
+          initX = this.offsetLeft;
+          initY = this.offsetTop;
+          firstX = e.pageX;
+          firstY = e.pageY;
+        });
+      });
+
+      function draggable(e) {
+        e.preventDefault();
+        if (!whichDown) return;
+        whichDown.style.zIndex = 9;
+        whichDown.style.left = initX + e.pageX - firstX + "px";
+        whichDown.style.top = initY + e.pageY - firstY + "px";
+      }
+    </script>
+  </body>
+</html>
